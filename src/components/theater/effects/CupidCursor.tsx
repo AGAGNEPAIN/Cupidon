@@ -29,7 +29,7 @@ export const CupidCursor: React.FC = () => {
         Simple bow and arrow shape.
       */}
       <img
-        src="/assets/cupid-cursor.png"
+        src={`${import.meta.env.BASE_URL}assets/cupid-cursor.png`}
         alt="Cupid Cursor"
         style={{
           width: "48px",

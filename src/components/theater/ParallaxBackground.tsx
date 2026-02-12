@@ -122,7 +122,7 @@ const Cherub: React.FC<CherubProps> = ({
       }}
     >
       <img
-        src="/assets/cherub.png"
+        src={`${import.meta.env.BASE_URL}assets/cherub.png`}
         alt="Cherub"
         className="w-full h-auto object-contain mix-blend-multiply animate-float"
         style={{

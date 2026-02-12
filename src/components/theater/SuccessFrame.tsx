@@ -102,7 +102,7 @@ export const SuccessFrame: React.FC = () => {
           style={{ clipPath: "url(#blob-mask)" }}
         >
           <img
-            src="/assets/sacred_portrait.png"
+            src={`${import.meta.env.BASE_URL}assets/sacred_portrait.png`}
             alt="Sacred Portrait"
             className="w-full h-full object-cover"
           />
