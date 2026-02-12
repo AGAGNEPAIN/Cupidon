@@ -1,0 +1,240 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&display=swap");
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-handwritten: "Caveat", cursive;
+}
+
+:root {
+  --color-nacre: #fafaf5;
+  --color-satin-gold: #c5a059;
+  --color-bleu-nuit: #0a1128;
+  --color-rose-poudre: #f8d7da;
+
+  /* Z-Index Strategy */
+  --z-background: 0;
+  --z-stage: 10;
+  --z-magic: 20;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-nacre);
+  color: var(--color-bleu-nuit);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: fixed; /* Extra lock against mobile pull-to-refresh / scroll */
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-bleu-nuit) 0%,
+    var(--color-satin-gold) 25%,
+    var(--color-bleu-nuit) 50%,
+    var(--color-satin-gold) 75%,
+    var(--color-bleu-nuit) 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Specific gold shimmer for the accent text */
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    #c5a059 0%,
+    #f8d7da 25%,
+    #c5a059 50%,
+    #f8d7da 75%,
+    #c5a059 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+.golden-border-reflet {
+  position: relative;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(45deg, #c5a059, #fbf2e9, #c5a059, #fbf2e9) border-box;
+  background-size: 200% 200%;
+  animation: shimmer 8s linear infinite;
+}
+
+@keyframes film-grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -5%);
+  }
+  20% {
+    transform: translate(-10%, 5%);
+  }
+  30% {
+    transform: translate(5%, -10%);
+  }
+  40% {
+    transform: translate(-5%, 15%);
+  }
+  50% {
+    transform: translate(-10%, 5%);
+  }
+  60% {
+    transform: translate(15%, 0);
+  }
+  70% {
+    transform: translate(0, 10%);
+  }
+  80% {
+    transform: translate(-15%, 0);
+  }
+  90% {
+    transform: translate(10%, 5%);
+  }
+  100% {
+    transform: translate(5%, 0);
+  }
+}
+
+.grain-filter {
+  position: absolute;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  /* C3: Inline SVG noise — no external CDN dependency */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 2;
+  animation: film-grain 8s steps(10) infinite;
+}
+
+@keyframes breathing {
+  0% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+}
+
+.animate-breathing {
+  animation: breathing 4s ease-in-out infinite;
+}
+
+/* B4: Shimmer light sweep effect for the Yes button */
+@keyframes btn-sweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: btn-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* C4: Sparkle float animation for decorative stars */
+@keyframes sparkle-float {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.2) rotate(180deg);
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle-float 5s ease-in-out infinite;
+}
+
+.animate-sparkle-delayed {
+  animation: sparkle-float 5s ease-in-out 2.5s infinite;
+}
