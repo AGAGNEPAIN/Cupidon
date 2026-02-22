@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTheater } from "./components/theater/TheaterProvider";
+import { useTheater } from "./hooks/useTheater";
 import BokehOverlay from "./components/theater/BokehOverlay";
 import { ParallaxBackground } from "./components/theater/ParallaxBackground";
 import { MainStage } from "./components/theater/MainStage";
@@ -10,6 +10,7 @@ import { EtherealButton } from "./components/theater/EtherealButton";
 import { useIsTouchDevice } from "./hooks/useIsTouchDevice";
 import { PrivateJokeGateway } from "./components/theater/PrivateJokeGateway";
 import "./App.css";
+import { QUESTIONS } from "./utils/questions";
 
 // Story 3.1: Lazy-load SuccessFrame for performance
 const SuccessFrame = lazy(() => import("./components/theater/SuccessFrame"));
@@ -26,40 +27,6 @@ function App() {
   const isTouch = useIsTouchDevice();
   const [isShaking, setIsShaking] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
-
-  // Sequence of romantic questions
-  const QUESTIONS = [
-    {
-      title: (
-        <>
-          Veux-tu être ma
-          <br />
-          <span className="italic font-semibold">Valentine</span> ?
-        </>
-      ),
-      yes: "Oui",
-      no: "Non",
-      showBebou: true,
-    },
-    {
-      title: "T'es sûre, sûre, sûre ?",
-      yes: "Évidemment ! 💕",
-      no: "Hmm... laisse-moi réfléchir",
-      showBebou: false,
-    },
-    {
-      title: "Pour combien de temps ?",
-      yes: "Pour toujours ♾️",
-      no: "Juste aujourd'hui",
-      showBebou: false,
-    },
-    {
-      title: "Tu promets de me faire des papouilles tous les jours ?",
-      yes: "Je promets ! 🤗",
-      no: "Peut-être...",
-      showBebou: false,
-    },
-  ];
 
   const currentQuestion = QUESTIONS[questionIndex];
 
@@ -118,7 +85,13 @@ function App() {
                   className="font-serif drop-shadow-sm text-center shimmer-text max-w-3xl"
                   style={{ fontSize: "clamp(1.5rem, 5vw, 4.5rem)" }}
                 >
-                  {currentQuestion.title}
+                  {currentQuestion.titleText}
+                  {currentQuestion.titleHighlight && (
+                    <span className="italic font-semibold">
+                      {currentQuestion.titleHighlight}
+                    </span>
+                  )}
+                  {currentQuestion.titleHighlight ? " ?" : ""}
                 </motion.h1>
 
                 {/* Floating handwritten note — "Mon Bebou" (only on first question) */}
