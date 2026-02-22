@@ -1,6 +1,6 @@
 import { MotionValue } from 'framer-motion';
 
-export type GameState = 'BOKEH' | 'DISSIPATING' | 'PLAYING' | 'ACCEPTED' | 'EVAPORATING';
+export type GameState = 'LOCKED' | 'BOKEH' | 'DISSIPATING' | 'PLAYING' | 'ACCEPTED' | 'EVAPORATING';
 
 export interface MotionMousePosition {
   x: MotionValue<number>;
@@ -20,4 +20,6 @@ export interface TheaterContextType {
   evaporationRect: DOMRect | null;
   triggerPetalBurst: (rect: DOMRect, count?: number) => void;
   lastPetalBurst: { rect: DOMRect; count: number; timestamp: number } | null;
+  requestGyroPermission: () => Promise<boolean>;
+  playMusic: () => Promise<void>;
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import { GameState, TheaterContextType } from "../../types/theater";
-import { useMousePhysics } from "../../hooks/useMousePhysics";
+import { usePointerPhysics } from "../../hooks/usePointerPhysics";
 import { DISSIPATION_DURATION } from "../../utils/constants";
 
 const TheaterContext = createContext<TheaterContextType | undefined>(undefined);
@@ -9,7 +9,17 @@ const TheaterContext = createContext<TheaterContextType | undefined>(undefined);
 export const TheaterProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [gameState, setGameState] = useState<GameState>("BOKEH");
+  const [gameState, setGameState] = useState<GameState>("LOCKED");
+  const [globalAudio] = useState(() => {
+    if (typeof window !== "undefined") {
+      const audio = new Audio(
+        `${import.meta.env.BASE_URL}assets/bebou_song.mp3`,
+      );
+      audio.loop = true;
+      return audio;
+    }
+    return null;
+  });
   const [noButtonAttempts, setNoButtonAttempts] = useState(0);
   const [evaporationRect, setEvaporationRect] = useState<DOMRect | null>(null);
   const [lastPetalBurst, setLastPetalBurst] = useState<{
@@ -17,12 +27,18 @@ export const TheaterProvider: React.FC<{ children: ReactNode }> = ({
     count: number;
     timestamp: number;
   } | null>(null);
-  const mousePosition = useMousePhysics();
+  const { requestGyroPermission, ...mousePosition } = usePointerPhysics();
 
-  const triggerReveal = () => {
+  const triggerReveal = async () => {
     if (gameState !== "BOKEH") return;
-
+    await requestGyroPermission(); // Fires from user gesture — iOS will show permission dialog
     setGameState("DISSIPATING");
+  };
+
+  const playMusic = async () => {
+    if (globalAudio) {
+      await globalAudio.play().catch(console.error);
+    }
   };
 
   const triggerPetalBurst = (rect: DOMRect, count: number = 20) => {
@@ -69,6 +85,8 @@ export const TheaterProvider: React.FC<{ children: ReactNode }> = ({
         evaporationRect,
         triggerPetalBurst,
         lastPetalBurst,
+        requestGyroPermission,
+        playMusic,
       }}
     >
       {children}
