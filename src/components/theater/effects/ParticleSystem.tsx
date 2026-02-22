@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheater } from "../TheaterProvider";
 import { Z_INDEX, COLORS } from "../../../utils/constants";
+import { useIsTouchDevice } from "../../../hooks/useIsTouchDevice";
 
 interface Particle {
   id: number;
@@ -18,6 +19,7 @@ interface Particle {
 export const ParticleSystem: React.FC = () => {
   const { gameState, mousePosition, evaporationRect, lastPetalBurst } =
     useTheater();
+  const isTouch = useIsTouchDevice();
   const [particles, setParticles] = useState<Particle[]>([]);
   const lastSpawn = useRef<{ x: number; y: number; time: number }>({
     x: 0,
@@ -97,8 +99,9 @@ export const ParticleSystem: React.FC = () => {
     spawnBurst(spawnX, spawnY, lastPetalBurst.count);
   }, [lastPetalBurst, spawnBurst]);
 
-  // Handle sparkle trail
+  // === DESKTOP ONLY: Mouse trail sparkles ===
   useEffect(() => {
+    if (isTouch) return;
     if (gameState === "BOKEH" || gameState === "EVAPORATING") return;
 
     // Determine spawn logic
@@ -124,7 +127,38 @@ export const ParticleSystem: React.FC = () => {
       unsubscribeX();
       unsubscribeY();
     };
-  }, [mousePosition, gameState, spawnParticle]);
+  }, [mousePosition, gameState, spawnParticle, isTouch]);
+
+  // === MOBILE ONLY: Ambient floating sparkles ===
+  useEffect(() => {
+    if (!isTouch) return;
+    if (gameState !== "PLAYING") return;
+
+    const interval = setInterval(() => {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      spawnParticle(x, y, "sparkle");
+    }, 400);
+
+    return () => clearInterval(interval);
+  }, [isTouch, gameState, spawnParticle]);
+
+  // === MOBILE ONLY: Touch-burst feedback ===
+  useEffect(() => {
+    if (!isTouch) return;
+    if (gameState === "BOKEH") return;
+
+    const handleTouch = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      for (let i = 0; i < 4; i++) {
+        spawnParticle(touch.clientX, touch.clientY, "sparkle");
+      }
+    };
+
+    window.addEventListener("touchstart", handleTouch, { passive: true });
+    return () => window.removeEventListener("touchstart", handleTouch);
+  }, [isTouch, gameState, spawnParticle]);
 
   const removeParticle = (id: number) => {
     setParticles((prev) => prev.filter((p) => p.id !== id));

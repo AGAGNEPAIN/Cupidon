@@ -56,7 +56,7 @@ export const SuccessFrame: React.FC = () => {
   return (
     <motion.div
       layoutId="apotheosis-morph"
-      className="relative w-full max-w-2xl bg-white/80 backdrop-blur-xl rounded-[3rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(197,160,89,0.3)] flex flex-col items-center gap-8 mx-4 golden-border-reflet"
+      className="relative w-full max-w-2xl bg-white/80 backdrop-blur-xl rounded-[clamp(1.5rem,5vw,3rem)] p-5 sm:p-8 md:p-12 shadow-[0_20px_50px_rgba(197,160,89,0.3)] flex flex-col items-center gap-8 mx-4 golden-border-reflet"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{
@@ -73,7 +73,8 @@ export const SuccessFrame: React.FC = () => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-3xl md:text-5xl font-serif text-(--color-bleu-nuit) italic"
+          className="font-serif text-(--color-bleu-nuit) italic"
+          style={{ fontSize: "clamp(1.25rem, 4vw, 3rem)" }}
         >
           <span className="shimmer-text">
             Je le savais. T'avais pas vraiment le choix de toute façon
@@ -86,7 +87,11 @@ export const SuccessFrame: React.FC = () => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
-        className="relative w-56 h-56 md:w-80 md:h-80 flex items-center justify-center animate-breathing"
+        className="relative flex items-center justify-center animate-breathing"
+        style={{
+          width: "clamp(12rem, 35vw, 20rem)",
+          height: "clamp(12rem, 35vw, 20rem)",
+        }}
       >
         {/* Organic Blob Mask via SVG Clip-path */}
         <svg width="0" height="0" className="absolute">
@@ -134,7 +139,8 @@ export const SuccessFrame: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="max-w-md text-center text-lg md:text-xl text-(--color-bleu-nuit) font-serif italic leading-relaxed overflow-visible"
+        className="max-w-md text-center text-(--color-bleu-nuit) font-serif italic leading-relaxed overflow-visible"
+        style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)" }}
       >
         <span className="shimmer-text">Joyeuse Saint-Valentin mon Bebou</span>{" "}
         <span>❤️</span>

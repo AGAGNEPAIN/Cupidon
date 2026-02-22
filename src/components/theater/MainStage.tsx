@@ -38,14 +38,14 @@ export const MainStage: React.FC<{ children?: React.ReactNode }> = ({
         className={`relative pointer-events-auto flex flex-col items-center justify-center ${
           isAccepted
             ? "w-full max-w-2xl mx-4"
-            : "w-[85vw] max-w-5xl h-[70vh] min-h-[500px] bg-nacre/30"
+            : "w-[95vw] sm:w-[85vw] max-w-5xl h-auto sm:h-[70vh] min-h-[55vh] sm:min-h-[500px] bg-nacre/30 px-6 py-10 sm:p-0"
         }`}
         style={
           isAccepted
             ? {} // C1: No border/backdrop in ACCEPTED to avoid artifact
             : {
                 border: "1px solid #C5A059", // Mat gold border
-                borderRadius: "100px", // Generous radius per spec
+                borderRadius: "clamp(40px, 8vw, 100px)", // Responsive radius
                 backdropFilter: "blur(5px)", // Atmospheric blur per spec
                 boxShadow: "0 0 40px rgba(197, 160, 89, 0.1)", // Subtle gold glow
               }
@@ -75,7 +75,7 @@ export const MainStage: React.FC<{ children?: React.ReactNode }> = ({
         {/* Inner Glow / Shimmer overlay for Satin feel — only in playing states */}
         {!isAccepted && (
           <div
-            className="absolute inset-0 rounded-[100px] pointer-events-none"
+            className="absolute inset-0 rounded-[clamp(40px,8vw,100px)] pointer-events-none"
             style={{
               background:
                 "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)",

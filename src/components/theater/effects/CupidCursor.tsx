@@ -2,9 +2,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useTheater } from "../TheaterProvider";
 import { Z_INDEX } from "../../../utils/constants";
+import { useIsTouchDevice } from "../../../hooks/useIsTouchDevice";
 
 export const CupidCursor: React.FC = () => {
   const { gameState, mousePosition } = useTheater();
+  const isTouch = useIsTouchDevice();
+
+  // Touch devices have no cursor — disable entirely
+  if (isTouch) return null;
 
   // Story AC 1: "Given any application state after BOKEH"
   // C2: Also hide in ACCEPTED for maximum solemnity during apotheosis

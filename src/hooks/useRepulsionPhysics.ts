@@ -1,6 +1,5 @@
 import { useEffect, RefObject, useRef } from 'react';
 import { useMotionValue, useSpring, MotionValue } from 'framer-motion';
-import { useMousePhysics } from './useMousePhysics';
 import { THEATER_SPRING } from '../utils/constants';
 
 interface UseRepulsionPhysicsProps {
@@ -8,6 +7,8 @@ interface UseRepulsionPhysicsProps {
   threshold?: number;
   strength?: number;
   onInteraction?: (rect: DOMRect) => void;
+  rawX: MotionValue<number>;
+  rawY: MotionValue<number>;
 }
 
 interface UseRepulsionPhysicsReturn {
@@ -21,9 +22,9 @@ export const useRepulsionPhysics = ({
   threshold = 150,
   strength = 100,
   onInteraction,
+  rawX,
+  rawY,
 }: UseRepulsionPhysicsProps): UseRepulsionPhysicsReturn => {
-  const { rawX, rawY } = useMousePhysics();
-  
   // Position targets for spring animation
   const x = useMotionValue(0);
   const y = useMotionValue(0);
