@@ -1,4 +1,4 @@
-# 💘 Cupidon (CuriOne)
+# 💘 Cupidon
 
 Une expérience web romantique et interactive conçue pour une déclaration spéciale (Saint-Valentin, anniversaire, etc.).
 
