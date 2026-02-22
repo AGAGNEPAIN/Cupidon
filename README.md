@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# 💘 Cupidon (CuriOne)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une expérience web romantique et interactive conçue pour une déclaration spéciale (Saint-Valentin, anniversaire, etc.).
 
-Currently, two official plugins are available:
+## ✨ Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Gateway "Private Joke"** : Une page de connexion personnalisée déverrouillable uniquement par un mot de passe/réponse à une private joke (visant une seule personne).
+- **Ambiance sonore** : Une musique continue et romantique qui se déclenche après la validation du mot de passe.
+- **Effets visuels immersifs** :
+  - Arrière-plan Parallax (effet de profondeur)
+  - Filtre "Bokeh" en surimpression
+  - Système de particules personnalisées (shaders)
+  - Curseur Cupidon personnalisé (non visible sur mobile, désactivé lors d'états solennels)
+- **Bouton "Non" Fuyant** : Un comportement interactif et amusant où le bouton de refus s'éloigne ou tremble lorsqu'on essaie de cliquer dessus sur desktop.
+- **Séquence engageante** : Une série de questions romantiques menant à un grand bouquet final en confettis (célébration de l'acceptation).
 
-## React Compiler
+## 🛠 Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **[React 19](https://react.dev/)**
+- **[Vite](https://vitejs.dev/)**
+- **[TypeScript](https://www.typescriptlang.org/)**
+- **[Tailwind CSS v4](https://tailwindcss.com/)** avec `@tailwindcss/vite`
+- **[Framer Motion](https://www.framer.com/motion/)** (pour la fluidité temporelle, l'orchestration des animations et le "fleeing button")
+- **[Canvas Confetti](https://github.com/catdad/canvas-confetti)**
+- **[Vite Plugin GLSL](https://github.com/UstymUkhman/vite-plugin-glsl)** pour l'intégration de shaders
 
-## Expanding the ESLint configuration
+## 🚀 Installation & Développement
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Installer les dépendances :
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```bash
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Démarrer le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+   L'application sera accessible (par défaut) sur http://localhost:5173.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📦 Scripts npm
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `npm run dev` : Lance le serveur de développement.
+- `npm run build` : Compile TypeScript et génère l'application de production.
+- `npm run lint` : Lance l'analyse de code via ESLint.
+- `npm run preview` : Démarre un serveur local pour tester la version de production (build).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🤝 Crédits et Inspiration
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Ce projet utilise des interactions modernes poussées (fleeing buttons, sound orchestration, lazy loading) pour créer une "surprise" unique en son genre, tout en gardant des performances fluides.
