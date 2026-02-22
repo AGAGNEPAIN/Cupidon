@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheater } from "../TheaterProvider";
-import { Z_INDEX, COLORS } from "../../../utils/constants";
+import { useTheater } from "../../../hooks/useTheater";
+import { Z_INDEX, COLORS, MAX_PARTICLES } from "../../../utils/constants";
 import { useIsTouchDevice } from "../../../hooks/useIsTouchDevice";
 
 interface Particle {
@@ -42,7 +42,7 @@ export const ParticleSystem: React.FC = () => {
 
       setParticles((prev) => {
         // Limit total particles to prevent DOM overload (AC 4)
-        if (prev.length > 200) return prev; // Increased limit for burst
+        if (prev.length > MAX_PARTICLES) return prev; // Limit to MAX_PARTICLES for performance
 
         return [
           ...prev,

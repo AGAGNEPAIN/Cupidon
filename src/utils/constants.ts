@@ -12,6 +12,7 @@ export const Z_INDEX = {
 
 export const DISSIPATION_DURATION = 2000;
 export const DISSIPATION_DURATION_SEC = DISSIPATION_DURATION / 1000;
+export const MAX_PARTICLES = 100;
 
 export const COLORS = {
   NACRE: '#FAFAF5',
