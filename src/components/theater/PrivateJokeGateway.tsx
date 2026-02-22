@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheater } from "./TheaterProvider";
+import { useTheater } from "../../hooks/useTheater";
 
 export const PrivateJokeGateway: React.FC = () => {
   const { setGameState, playMusic } = useTheater();

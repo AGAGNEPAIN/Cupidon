@@ -3,7 +3,7 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { useRepulsionPhysics } from "../../hooks/useRepulsionPhysics";
 import { LiquifyFilter } from "./effects/GlobalStageFilters";
 import { useIsTouchDevice } from "../../hooks/useIsTouchDevice";
-import { useTheater } from "./TheaterProvider";
+import { useTheater } from "../../hooks/useTheater";
 
 interface EtherealButtonProps extends HTMLMotionProps<"button"> {
   threshold?: number;

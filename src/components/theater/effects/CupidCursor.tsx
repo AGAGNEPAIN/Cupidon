@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useTheater } from "../TheaterProvider";
+import { useTheater } from "../../../hooks/useTheater";
 import { Z_INDEX } from "../../../utils/constants";
 import { useIsTouchDevice } from "../../../hooks/useIsTouchDevice";
 

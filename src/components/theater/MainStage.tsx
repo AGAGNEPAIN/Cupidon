@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheater } from "./TheaterProvider";
+import { useTheater } from "../../hooks/useTheater";
 import { motion } from "framer-motion";
 import { Z_INDEX } from "../../utils/constants";
 

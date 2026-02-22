@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTheater } from "./TheaterProvider";
+import { useTheater } from "../../hooks/useTheater";
 import { motion, useTransform } from "framer-motion";
 import { Z_INDEX } from "../../utils/constants";
 import { MotionMousePosition } from "../../types/theater";

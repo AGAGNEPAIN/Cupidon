@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useState } from "react";
 import type { ReactNode } from "react";
-import { GameState, TheaterContextType } from "../../types/theater";
+import { GameState } from "../../types/theater";
 import { usePointerPhysics } from "../../hooks/usePointerPhysics";
 import { DISSIPATION_DURATION } from "../../utils/constants";
 
-const TheaterContext = createContext<TheaterContextType | undefined>(undefined);
+import { TheaterContext } from "../../hooks/useTheater";
 
 export const TheaterProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -92,12 +92,4 @@ export const TheaterProvider: React.FC<{ children: ReactNode }> = ({
       {children}
     </TheaterContext.Provider>
   );
-};
-
-export const useTheater = () => {
-  const context = useContext(TheaterContext);
-  if (context === undefined) {
-    throw new Error("useTheater must be used within a TheaterProvider");
-  }
-  return context;
 };

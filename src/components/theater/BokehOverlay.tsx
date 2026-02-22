@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheater } from "./TheaterProvider";
+import { useTheater } from "../../hooks/useTheater";
 import {
   COLORS,
   Z_INDEX,
